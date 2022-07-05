@@ -14,7 +14,7 @@ app.post('/login', async (req, res)=>{
     //comprovamos si son correctos
     if (user == 'admin' && password == '12345') {
         // await indica que es asincronica
-            let passwordHash = await bcryptjs.hash(password, 8); //cuantas más interacciones haya mas lemta se la autentificacion=> más segura  
+            let passwordHash = await bcryptjs.hash(password, 20); //cuantas más interacciones haya mas lemta se la autentificacion=> más segura  
             res.json({        
             message:'Autentificacion exitosa',
             passwordHash: passwordHash
@@ -48,8 +48,8 @@ app.post('/login', async (req, res)=>{
 
 //comparacion sincrona
 app.get('/compare', (req, res)=>{
-    let hashSaved = '$2a$08$gnJw5WvkhUFnJf6zm6NNCuoeQHpU7tqaJNcIP9eeQreB4/xdf2vAq'; //numero hash que genero en la funcion anterior y se vio en posman
-    let compare = bcryptjs.compareSync('12345, hashSaved');
+    let hashSaved = '$2a$08$Q9H7l1GI0MFHFOYKE.nVh.MKvFtkLvoTnr/co9c8hVY4mJpqj/Kpa'; //numero hash que genero en la funcion anterior y se vio en posman
+    let compare = bcryptjs.compareSync('12345', hashSaved);
     if (compare) {
         res.json('ok');
     }else{
